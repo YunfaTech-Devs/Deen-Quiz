@@ -1,135 +1,171 @@
 (function ($) {
-    "use strict";
-    
-    new WOW().init();  
-    
-    /*---background image---*/
-	function dataBackgroundImage() {
-		$('[data-bgimg]').each(function () {
-			var bgImgUrl = $(this).data('bgimg');
-			$(this).css({
-				'background-image': 'url(' + bgImgUrl + ')', // + meaning concat
-			});
-		});
+  "use strict";
+
+  new WOW().init();
+
+  /*---background image---*/
+  function dataBackgroundImage() {
+    $("[data-bgimg]").each(function () {
+      var bgImgUrl = $(this).data("bgimg");
+      $(this).css({
+        "background-image": "url(" + bgImgUrl + ")", // + meaning concat
+      });
+    });
+  }
+
+  $(window).on("load", function () {
+    dataBackgroundImage();
+  });
+
+  /*---stickey menu---*/
+  $(window).on("scroll", function () {
+    var scroll = $(window).scrollTop();
+    if (scroll < 100) {
+      $(".sticky-header").removeClass("sticky");
+    } else {
+      $(".sticky-header").addClass("sticky");
     }
-    
-    $(window).on('load', function () {
-        dataBackgroundImage();
+  });
+
+  // Slick Slider Activation
+  var $sliderActvation = $(".slick__activation");
+  if ($sliderActvation.length > 0) {
+    $sliderActvation.slick({
+      prevArrow:
+        '<button class="prev_arrow"><img width="17" height="24" src="assets/img/icon/navigation-arrow2.webp" alt=""></button>',
+      nextArrow:
+        '<button class="next_arrow"><img width="17" height="24" src="assets/img/icon/navigation-arrow1.webp" alt=""></button>',
     });
-    
+  }
 
-    /*---stickey menu---*/
-    $(window).on('scroll',function() {    
-           var scroll = $(window).scrollTop();
-           if (scroll < 100) {
-            $(".sticky-header").removeClass("sticky");
-           }else{
-            $(".sticky-header").addClass("sticky");
-           }
+  // Slick Slider Activation2
+  var $sliderActvation = $(".slick__activation2");
+  if ($sliderActvation.length > 0) {
+    $sliderActvation.slick({
+      prevArrow:
+        '<button class="prev_arrow"><i class="icofont-long-arrow-left"></i></button>',
+      nextArrow:
+        '<button class="next_arrow"><i class="icofont-long-arrow-right"></i></button>',
     });
+  }
 
-    // Slick Slider Activation
-    var $sliderActvation = $('.slick__activation');
-    if($sliderActvation.length > 0){
-        $sliderActvation.slick({
-          prevArrow:'<button class="prev_arrow"><img width="17" height="24" src="assets/img/icon/navigation-arrow2.webp" alt=""></button>',
-          nextArrow:'<button class="next_arrow"><img width="17" height="24" src="assets/img/icon/navigation-arrow1.webp" alt=""></button>',
-        });
-    };
+  /*--- Magnific Popup Video---*/
+  $(".video_popup").magnificPopup({
+    type: "iframe",
+    removalDelay: 300,
+    mainClass: "mfp-fade",
+  });
 
-    // Slick Slider Activation2
-    var $sliderActvation = $('.slick__activation2');
-    if($sliderActvation.length > 0){
-        $sliderActvation.slick({
-          prevArrow:'<button class="prev_arrow"><i class="icofont-long-arrow-left"></i></button>',
-          nextArrow:'<button class="next_arrow"><i class="icofont-long-arrow-right"></i></button>',
-        });
-    };
+  $(".popup_img").magnificPopup({
+    type: "image",
+    gallery: {
+      enabled: true,
+    },
+  });
 
+  /*--- counterup activation ---*/
+  $(".counterup").counterUp({
+    delay: 20,
+    time: 2000,
+  });
 
-    /*--- Magnific Popup Video---*/
-    $('.video_popup').magnificPopup({
-        type: 'iframe',
-        removalDelay: 300,
-        mainClass: 'mfp-fade'
-    });
+  // niceselect activation
+  $(document).ready(function () {
+    $("select,.select_option").niceSelect();
+  });
 
-    $('.popup_img').magnificPopup({
-        type: 'image',
-        gallery: {
-            enabled: true
+  // Scroll to top
+  scrollToTop();
+
+  function scrollToTop() {
+    var $scrollUp = $("#scroll-top"),
+      $lastScrollTop = 0,
+      $window = $(window);
+
+    $window.on("scroll", function () {
+      var st = $(this).scrollTop();
+      if (st > $lastScrollTop) {
+        $scrollUp.removeClass("show");
+      } else {
+        if ($window.scrollTop() > 200) {
+          $scrollUp.addClass("show");
+        } else {
+          $scrollUp.removeClass("show");
         }
+      }
+      $lastScrollTop = st;
     });
-    
 
-     /*--- counterup activation ---*/
-     $('.counterup').counterUp({
-        delay: 20,
-        time: 2000
+    $scrollUp.on("click", function (evt) {
+      $("html, body").animate({ scrollTop: 0 }, 600);
+      evt.preventDefault();
     });
- 
-    // niceselect activation
-    $(document).ready(function() {
-      $('select,.select_option').niceSelect();
-    });
-    
-    // Scroll to top
-    scrollToTop();
+  }
+  scrollToTop();
 
-    function scrollToTop() {
-        var $scrollUp = $('#scroll-top'),
-            $lastScrollTop = 0,
-            $window = $(window);
+  /*---Off Canvas Menu---*/
+  var $offcanvasNav = $(".offcanvas_main_menu"),
+    $offcanvasNavSubMenu = $offcanvasNav.find(".sub-menu");
+  $offcanvasNavSubMenu
+    .parent()
+    .prepend(
+      '<span class="menu-expand"><i class="icofont-simple-down"></i></span>'
+    );
 
-        $window.on('scroll', function () {
-            var st = $(this).scrollTop();
-            if (st > $lastScrollTop) {
-                $scrollUp.removeClass('show');
-            } else {
-                if ($window.scrollTop() > 200) {
-                    $scrollUp.addClass('show');
-                } else {
-                    $scrollUp.removeClass('show');
-                }
-            }
-            $lastScrollTop = st;
-        });
+  $offcanvasNavSubMenu.slideUp();
 
-        $scrollUp.on('click', function (evt) {
-            $('html, body').animate({scrollTop: 0}, 600);
-            evt.preventDefault();
-        });
+  $offcanvasNav.on("click", "li a, li .menu-expand", function (e) {
+    var $this = $(this);
+    if (
+      $this
+        .parent()
+        .attr("class")
+        .match(/\b(menu-item-has-children|has-children|has-sub-menu)\b/) &&
+      ($this.attr("href") === "#" || $this.hasClass("menu-expand"))
+    ) {
+      e.preventDefault();
+      if ($this.siblings("ul:visible").length) {
+        $this.siblings("ul").slideUp("slow");
+      } else {
+        $this.closest("li").siblings("li").find("ul:visible").slideUp("slow");
+        $this.siblings("ul").slideDown("slow");
+      }
     }
-    scrollToTop();
-    
-    
-    /*---Off Canvas Menu---*/
-    var $offcanvasNav = $('.offcanvas_main_menu'),
-        $offcanvasNavSubMenu = $offcanvasNav.find('.sub-menu');
-    $offcanvasNavSubMenu.parent().prepend('<span class="menu-expand"><i class="icofont-simple-down"></i></span>');
-    
-    $offcanvasNavSubMenu.slideUp();
-    
-    $offcanvasNav.on('click', 'li a, li .menu-expand', function(e) {
-        var $this = $(this);
-        if ( ($this.parent().attr('class').match(/\b(menu-item-has-children|has-children|has-sub-menu)\b/)) && ($this.attr('href') === '#' || $this.hasClass('menu-expand')) ) {
-            e.preventDefault();
-            if ($this.siblings('ul:visible').length){
-                $this.siblings('ul').slideUp('slow');
-            }else {
-                $this.closest('li').siblings('li').find('ul:visible').slideUp('slow');
-                $this.siblings('ul').slideDown('slow');
-            }
-        }
-        if( $this.is('a') || $this.is('span') || $this.attr('clas').match(/\b(menu-expand)\b/) ){
-        	$this.parent().toggleClass('menu-open');
-        }else if( $this.is('li') && $this.attr('class').match(/\b('menu-item-has-children')\b/) ){
-        	$this.toggleClass('menu-open');
-        }
-    });
+    if (
+      $this.is("a") ||
+      $this.is("span") ||
+      $this.attr("clas").match(/\b(menu-expand)\b/)
+    ) {
+      $this.parent().toggleClass("menu-open");
+    } else if (
+      $this.is("li") &&
+      $this.attr("class").match(/\b('menu-item-has-children')\b/)
+    ) {
+      $this.toggleClass("menu-open");
+    }
+  });
+})(jQuery);
 
-     
-    
-})(jQuery);	
+//Quiz Section JAvascript
+//  Timer box
 
+const countdownNumberEl = document.querySelector(".countdown_active");
+let countdown = 60;
+let timer = setInterval(function () {
+  countdown = --countdown <= 0 ? 60 : countdown;
+  countdownNumberEl.textContent = countdown;
 
+  if (countdown === 0) {
+    clearInterval(timer);
+  }
+}, 1000);
+
+countdownNumberEl.textContent = countdown;
+
+function tick() {
+  setTimeout(function () {
+    window.location.href = "https://deen-quiz.netlify.app/index.html";
+  }, 60000);
+}
+
+//Quiz question Section
