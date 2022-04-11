@@ -974,6 +974,12 @@ textarea:-ms-input-placeholder {
   }
 }
 
+@media only screen and (max-width: 575px) {
+  .sing_up_btn .btn.btn-link {
+    display: none;
+  }
+}
+
 .sing_up_btn .btn.btn-link {
   background: url(../img/others/btn-signup.webp);
   font-size: 16px;
@@ -985,6 +991,20 @@ textarea:-ms-input-placeholder {
   margin-left: 8px;
 }
 .sing_up_btn .btn.btn-link:hover img {
+  margin-left: 12px;
+}
+
+.start_up_btn .btn.btn-link {
+  background: url(../img/others/btn-signup.webp);
+  font-size: 16px;
+  width: 157px;
+  height: 60px;
+  line-height: 60px;
+}
+.start_up_btn .btn.btn-link img {
+  margin-left: 8px;
+}
+.start_up_btn .btn.btn-link:hover img {
   margin-left: 12px;
 }
 
@@ -1689,7 +1709,7 @@ textarea:-ms-input-placeholder {
 }
 @media only screen and (max-width: 575px) {
   .hero_content {
-    padding-top: 152px;
+    padding-top: 100px;
   }
 }
 .hero_content h1 {
@@ -1756,9 +1776,9 @@ textarea:-ms-input-placeholder {
 }
 @media only screen and (max-width: 575px) {
   .hero_content p {
-    font-size: 17px;
-    margin-bottom: 20px;
-    line-height: 28px;
+    font-size: 16px;
+    margin-bottom: 60px;
+    line-height: 30px;
   }
 }
 
@@ -3242,7 +3262,7 @@ section.error_section {
 }
 @media only screen and (max-width: 575px) {
   .breadcrumbs_text {
-    padding-top: 162px;
+    padding-top: 120px;
   }
 }
 .breadcrumbs_text h1 {
@@ -7261,6 +7281,7 @@ li {
   left: 0;
   right: 0;
   position: absolute;
+  margin-top: 12rem;
 }
 .arrow {
   border-color: transparent;
