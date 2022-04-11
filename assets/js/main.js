@@ -279,7 +279,7 @@ function go(x) {
       duration: 1000,
       easing: "linear",
       step: function (now, fx) {
-        $("#score").html(2 * score + Math.floor(now));
+        $("#score").html(score + Math.floor(now));
       },
       queue: false,
       complete: function (now, fx) {
@@ -302,3 +302,5 @@ function go(x) {
       },
     });
 }
+
+// leaderboard data population
